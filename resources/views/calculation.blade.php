@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{asset('guest/assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('guest/global.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
-    <link rel="shortcut icon" href="{{asset('admin/images/logo.png')}}" />
 
     <!-- hightchart -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -32,25 +31,25 @@
 </head>
 
 <body>
-    <!--HamBurger Icon-->
-    <div class="bars" id="nav-action">
-        <span class="bar"> </span>
-    </div>
-
-    <!--Navbar Links-->
-    <nav id="nav">
-        <ul>
-            <li class="shape-circle circle-two">
-                @if(auth()->user())
-                <a href="{{url('/dashboard')}}">Dashboard</a>
-                @else
-                <a href="{{url('/login')}}">Login</a>
-                @endif
-            </li>
-            <li class="shape-circle circle-three"><a href="{{url('/kriteria')}}">Kriteria</a></li>
-            <li class="shape-circle circle-three"><a href="{{url('/calculation')}}">Calculation</a></li>
-            <li class="shape-circle circle-five"><a href="/">Home</a></li>
-        </ul>
+    <!--Navbar-->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{{asset('guest/assets/images/logo.png')}}" alt="Logo">
+            <h1>SPK Bantuan Raskin</h1>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="navbar-menu">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url('/kriteria') }}"><i class="fas fa-list-alt"></i> Kriteria</a>
+            <a href="{{ url('/calculation') }}"><i class="fas fa-calculator"></i> Calculation</a>
+            @if(auth()->user())
+            <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            @else
+            <a href="{{ url('/login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            @endif
+        </div>
     </nav>
 
     <!--Main Body Content-->
@@ -70,162 +69,155 @@
             </figure>
         </div>
     </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navbarMenu = document.querySelector('.navbar-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+        });
+
+        // Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 0;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
+        }
+
+        function reveal2() {
+            const reveals = document.querySelectorAll(".reveal2");
+
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 0;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("load", reveal);
+        window.addEventListener("scroll", reveal2);
+    </script>
+
+    <script type="text/javascript">
+    var chartData = @json($dataAlternatifData);
+    var chartCategories = @json($dataAlternatifNama);
+
+    // Menggabungkan kategori dan data menjadi satu array objek
+    var combinedData = chartCategories.map(function(name, index) {
+        return { name: name, y: chartData[index] };
+    });
+
+    // Mengurutkan array berdasarkan nama
+    combinedData.sort(function(a, b) {
+        return a.name.localeCompare(b.name);
+    });
+
+    // Memisahkan kembali menjadi array terpisah untuk kategori dan data
+    chartCategories = combinedData.map(function(item) { return item.name; });
+    chartData = combinedData.map(function(item) { return item.y; });
+
+    Highcharts.chart('chart1', {
+        chart: {
+            type: 'column',
+            backgroundColor: '#FCFFC5',
+            borderRadius: 10
+        },
+        title: {
+            text: 'Hasil Perhitungan Calon Penerima Bantuan',
+            align: 'center'
+        },
+        xAxis: {
+            categories: chartCategories,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Nilai Akhir'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:12px; height:40px;">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color}; padding:0; text-align:center; "></td>' +
+                '<td style="padding:0; font-size:12px;"><b>Nilai Akhir&nbsp;{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Nilai Akhir',
+            color: '#3b3b3b',
+            data: chartData
+        }]
+    });
+    </script>
+
+    <script type="text/javascript">
+    var chartCategories2 = @json($sepuluhTerbesarNama);
+    var chartData2 = @json($sepuluhTerbesarData);
+    Highcharts.chart('chart2', {
+        chart: {
+            type: 'column',
+            backgroundColor: '#FCFFC5',
+            borderRadius: 10
+        },
+        title: {
+            text: 'Penerima Bantuan Raskin',
+            align: 'center'
+        },
+        xAxis: {
+            categories: chartCategories2,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Nilai Akhir'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:12px;">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color}; padding:0; text-align:center;"></td>' +
+                '<td style="padding:0; font-size:12px;"><b>Nilai Akhir&nbsp;{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Nilai Akhir',
+            color: '#3b3b3b',
+            data: chartData2
+        }]
+    });
+    </script>
 </body>
-
-<script>
-// Setting up the Variables
-var bars = document.getElementById("nav-action");
-var nav = document.getElementById("nav");
-
-
-//setting up the listener
-bars.addEventListener("click", barClicked, false);
-
-
-//setting up the clicked Effect
-function barClicked() {
-    bars.classList.toggle('active');
-    nav.classList.toggle('visible');
-}
-
-function reveal() {
-    var reveals = document.querySelectorAll(".reveal");
-
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 0;
-
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-        } else {
-            reveals[i].classList.remove("active");
-        }
-    }
-}
-
-window.addEventListener("load", reveal);
-
-function reveal2() {
-    var reveals = document.querySelectorAll(".reveal2");
-
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 0;
-
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-        }
-    }
-}
-
-window.addEventListener("scroll", reveal2);
-</script>
-
-<script type="text/javascript">
-var chartData = @json($dataAlternatifData);
-var chartCategories = @json($dataAlternatifNama);
-
-// Menggabungkan kategori dan data menjadi satu array objek
-var combinedData = chartCategories.map(function(name, index) {
-    return { name: name, y: chartData[index] };
-});
-
-// Mengurutkan array berdasarkan nama
-combinedData.sort(function(a, b) {
-    return a.name.localeCompare(b.name);
-});
-
-// Memisahkan kembali menjadi array terpisah untuk kategori dan data
-chartCategories = combinedData.map(function(item) { return item.name; });
-chartData = combinedData.map(function(item) { return item.y; });
-
-Highcharts.chart('chart1', {
-    chart: {
-        type: 'column',
-        backgroundColor: '#FCFFC5',
-        borderRadius: 10
-    },
-    title: {
-        text: 'Hasil Perhitungan Calon Penerima Bantuan',
-        align: 'center'
-    },
-    xAxis: {
-        categories: chartCategories,
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Nilai Akhir'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:12px; height:40px;">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color}; padding:0; text-align:center; "></td>' +
-            '<td style="padding:0; font-size:12px;"><b>Nilai Akhir&nbsp;{point.y}</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Nilai Akhir',
-        color: '#3b3b3b',
-        data: chartData
-    }]
-});
-</script>
-
-<script type="text/javascript">
-var chartCategories2 = @json($sepuluhTerbesarNama);
-var chartData2 = @json($sepuluhTerbesarData);
-Highcharts.chart('chart2', {
-    chart: {
-        type: 'column',
-        backgroundColor: '#FCFFC5',
-        borderRadius: 10
-    },
-    title: {
-        text: 'Penerima Bantuan Raskin',
-        align: 'center'
-    },
-    xAxis: {
-        categories: chartCategories2,
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Nilai Akhir'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:12px;">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color}; padding:0; text-align:center;"></td>' +
-            '<td style="padding:0; font-size:12px;"><b>Nilai Akhir&nbsp;{point.y}</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Nilai Akhir',
-        color: '#3b3b3b',
-        data: chartData2
-    }]
-});
-</script>
 
 </html>

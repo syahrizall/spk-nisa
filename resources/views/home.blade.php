@@ -13,25 +13,25 @@
 </head>
 
 <body>
-    <!--HamBurger Icon-->
-    <div class="bars" id="nav-action">
-        <span class="bar"> </span>
-    </div>
-
-    <!--Navbar Links-->
-    <nav id="nav">
-        <ul>
-            <li class="shape-circle circle-two">
-                @if(auth()->user())
-                <a href="{{url('/dashboard')}}">Dashboard</a>
-                @else
-                <a href="{{url('/login')}}">Login</a>
-                @endif
-            </li>
-            <li class="shape-circle circle-three"><a href="{{url('/kriteria')}}">Kriteria</a></li>
-            <li class="shape-circle circle-three"><a href="{{url('/calculation')}}">Calculation</a></li>
-            <li class="shape-circle circle-five"><a href="/">Home</a></li>
-        </ul>
+    <!--Navbar-->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{{asset('guest/assets/images/logo.png')}}" alt="Logo">
+            <h1>SPK Bantuan Raskin</h1>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="navbar-menu">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url('/kriteria') }}"><i class="fas fa-list-alt"></i> Kriteria</a>
+            <a href="{{ url('/calculation') }}"><i class="fas fa-calculator"></i> Calculation</a>
+            @if(auth()->user())
+            <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            @else
+            <a href="{{ url('/login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            @endif
+        </div>
     </nav>
 
     <!--Main Body Content-->
@@ -43,40 +43,36 @@
             <h4>Studi Kasus : Kelurahan Maleber</h4>
         </article>
     </div>
-</body>
 
-<script defer>
-// Setting up the Variables
-const bars = document.getElementById("nav-action");
-const nav = document.getElementById("nav");
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navbarMenu = document.querySelector('.navbar-menu');
 
-//setting up the listener
-bars.addEventListener("click", barClicked, false);
+        mobileMenuBtn.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+        });
 
-//setting up the clicked Effect
-function barClicked() {
-    bars.classList.toggle('active');
-    nav.classList.toggle('visible');
-}
+        // Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
 
-function reveal() {
-    const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 0;
 
-    for (let i = 0; i < reveals.length; i++) {
-        const windowHeight = window.innerHeight;
-        const elementTop = reveals[i].getBoundingClientRect().top;
-        const elementVisible = 0;
-
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-        } else {
-            reveals[i].classList.remove("active");
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
         }
-    }
-}
 
-window.addEventListener("load", reveal);
-window.addEventListener("scroll", reveal);
-</script>
+        window.addEventListener("load", reveal);
+        window.addEventListener("scroll", reveal);
+    </script>
+</body>
 
 </html>

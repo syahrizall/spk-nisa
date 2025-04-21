@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login - PT. Shiddiq Sarana Mulya</title>
+    <title>Login - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi</title>
     <link rel="shortcut icon" href="{{asset('guest/assets/images/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('guest/assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('guest/global.css')}}">
@@ -13,29 +13,29 @@
 </head>
 
 <body>
-    <!--HamBurger Icon-->
-    <div class="bars" id="nav-action">
-        <span class="bar"> </span>
-    </div>
-
-    <!--Navbar Links-->
-    <nav id="nav">
-        <ul>
-            <li class="shape-circle circle-two">
-                @if(auth()->user())
-                <a href="{{ url('/dashboard') }}">Dashboard</a>
-                @else
-                <a href="{{ url('/login') }}">Login</a>
-                @endif
-            </li>
-            <li class="shape-circle circle-three"><a href="{{ url('/kriteria') }}">Kriteria</a></li>
-            <li class="shape-circle circle-three"><a href="{{ url('/calculation') }}">Calculation</a></li>
-            <li class="shape-circle circle-five"><a href="/">Home</a></li>
-        </ul>
+    <!--Navbar-->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="{{asset('guest/assets/images/logo.png')}}" alt="Logo">
+            <h1>SPK Siswa Berprestasi</h1>
+        </div>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="navbar-menu">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="{{ url('/kriteria') }}"><i class="fas fa-list-alt"></i> Kriteria</a>
+            <a href="{{ url('/calculation') }}"><i class="fas fa-calculator"></i> Calculation</a>
+            @if(auth()->user())
+            <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            @else
+            <a href="{{ url('/login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            @endif
+        </div>
     </nav>
 
     <!--Main Body Content-->
-    <form method="POST" action="{{ route('login') }}" onsubmit="return validateForm()">
+    <form method="POST" action="{{ route('login') }}" onsubmit="return validateForm()" class="login-form">
         @csrf
         <h3>Login</h3>
         <label for="username">Username</label>
@@ -45,38 +45,16 @@
         <button type="submit">Log In</button>
     </form>
 
-<script>
-// Setting up the Variables
-var bars = document.getElementById("nav-action");
-var nav = document.getElementById("nav");
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navbarMenu = document.querySelector('.navbar-menu');
 
-        //setting up the listener
-        bars.addEventListener("click", barClicked, false);
+        mobileMenuBtn.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+        });
 
-        //setting up the clicked Effect
-        function barClicked() {
-            bars.classList.toggle('active');
-            nav.classList.toggle('visible');
-        }
-
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 0;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                } else {
-                    reveals[i].classList.remove("active");
-                }
-            }
-        }
-
-        window.addEventListener("load", reveal);
-
+        // Form Validation
         function validateForm() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;

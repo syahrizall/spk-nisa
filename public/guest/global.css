@@ -342,3 +342,503 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Navbar Baru */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+.navbar-brand h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .navbar-brand h1 {
+        font-size: 1.3rem;
+    }
+    
+    .navbar-menu {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-brand h1 {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-menu a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        animation: slideDown 0.3s ease;
+    }
+    
+    .navbar-menu.active {
+        display: flex;
+    }
+    
+    .navbar-brand h1 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 0.8rem;
+    }
+    
+    .navbar-brand img {
+        height: 35px;
+    }
+    
+    .navbar-brand h1 {
+        font-size: 1rem;
+    }
+    
+    .mobile-menu-btn {
+        font-size: 1.3rem;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Login Form */
+.login-form {
+    margin-top: 100px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.login-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.login-form button {
+    width: 100%;
+    padding: 0.8rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-form button:hover {
+    background: #45a049;
+}
+
+/* Responsive Login Form */
+@media (max-width: 768px) {
+    .login-form {
+        margin-top: 80px;
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .login-form h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .login-form input {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .login-form button {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-form {
+        margin-top: 60px;
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .login-form h3 {
+        font-size: 1.3rem;
+    }
+
+    .login-form label {
+        font-size: 0.9rem;
+    }
+
+    .login-form input {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .login-form button {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+
+    .navbar-brand h1 {
+        font-size: 1.2rem;
+    }
+
+    .navbar-brand img {
+        height: 35px;
+    }
+
+    .navbar-menu {
+        padding: 0.8rem;
+    }
+
+    .navbar-menu a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .navbar-brand h1 {
+        font-size: 1rem;
+    }
+
+    .navbar-brand img {
+        height: 30px;
+    }
+
+    .navbar-menu {
+        padding: 0.6rem;
+    }
+
+    .navbar-menu a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .mobile-menu-btn {
+        font-size: 1.2rem;
+    }
+}
+
+/* Kriteria Cards */
+.kriteria ul {
+    width: min(100%, 60rem);
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    gap: 2rem;
+    perspective: 1000px;
+}
+
+.kriteria ul li.card {
+    position: relative;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.kriteria ul li.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.kriteria ul li.card .icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--color);
+    transition: all 0.3s ease;
+}
+
+.kriteria ul li.card:hover .icon {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.kriteria ul li.card .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color);
+}
+
+.kriteria ul li.card .content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Kriteria Card Colors */
+.kriteria ul li.card:nth-child(1) {
+    --color: #FFD700;
+    background: linear-gradient(135deg, rgba(179, 149, 60, 0.2), rgba(179, 149, 60, 0.1));
+}
+
+.kriteria ul li.card:nth-child(2) {
+    --color: #4CAF50;
+    background: linear-gradient(135deg, rgba(44, 44, 44, 0.2), rgba(44, 44, 44, 0.1));
+}
+
+.kriteria ul li.card:nth-child(3) {
+    --color: #2196F3;
+    background: linear-gradient(135deg, rgba(59, 59, 59, 0.2), rgba(59, 59, 59, 0.1));
+}
+
+.kriteria ul li.card:nth-child(4) {
+    --color: #FF5722;
+    background: linear-gradient(135deg, rgba(83, 83, 83, 0.2), rgba(83, 83, 83, 0.1));
+}
+
+.kriteria ul li.card:nth-child(5) {
+    --color: #9C27B0;
+    background: linear-gradient(135deg, rgba(3, 36, 55, 0.2), rgba(3, 36, 55, 0.1));
+}
+
+/* Responsive Kriteria Cards */
+@media (max-width: 768px) {
+    .kriteria ul {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .kriteria ul li.card {
+        padding: 1.5rem;
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .kriteria ul li.card .icon {
+        margin: 0 auto;
+    }
+
+    .kriteria ul li.card .title {
+        font-size: 1.2rem;
+    }
+
+    .kriteria ul li.card .content {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .kriteria ul {
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+
+    .kriteria ul li.card {
+        padding: 1.2rem;
+    }
+
+    .kriteria ul li.card .icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .kriteria ul li.card .title {
+        font-size: 1.1rem;
+    }
+
+    .kriteria ul li.card .content {
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Calculation Charts */
+@media (max-width: 992px) {
+    #chart1, #chart2 {
+        height: 400px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #chart1, #chart2 {
+        height: 350px !important;
+    }
+
+    .reveal h1 {
+        font-size: 1.5rem;
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 576px) {
+    #chart1, #chart2 {
+        height: 300px !important;
+    }
+
+    .reveal h1 {
+        font-size: 1.3rem;
+        margin-top: 50px;
+    }
+}
+
+/* Responsive Home Page */
+@media (max-width: 768px) {
+    .home h1 {
+        font-size: 1.5rem;
+    }
+
+    .home h4 {
+        font-size: 1.1rem;
+    }
+
+    .home img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .home h1 {
+        font-size: 1.3rem;
+    }
+
+    .home h4 {
+        font-size: 1rem;
+    }
+
+    .home img {
+        width: 150px;
+        height: 150px;
+    }
+}
