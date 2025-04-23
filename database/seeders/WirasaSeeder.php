@@ -6,32 +6,32 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class JumlahAnggotaKeluargaSeeder extends Seeder
+class WirasaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('m_jumlah_anggota_keluarga')->insert([
+        DB::table('m_wirasa')->insert([
             [
-                'range' => '1 anggota keluarga',
+                'range' => '10-50',
                 'nilai' => 1,
             ],
             [
-                'range' => '2 anggota keluarga',
+                'range' => '51-60',
                 'nilai' => 2,
             ],
             [
-                'range' => '3 anggota keluarga',
+                'range' => '61-70',
                 'nilai' => 3,
             ],
             [
-                'range' => '4 anggota keluarga',
+                'range' => '71-80',
                 'nilai' => 4,
             ],
             [
-                'range' => '5 atau lebih anggota keluarga',
+                'range' => '81-100',
                 'nilai' => 5,
             ]
         ]);

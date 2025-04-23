@@ -1,5 +1,5 @@
 @extends('dashboard.master')
-@section('title', 'Data Bobot - Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin Di Kelurahan Maleber')
+@section('title', 'Data Bobot - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi')
 
 @section('custom-css')
 <style>

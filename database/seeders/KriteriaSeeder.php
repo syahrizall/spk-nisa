@@ -16,28 +16,18 @@ class KriteriaSeeder extends Seeder
         DB::table('m_kriteria')->insert([
             [
                 'kode' => 'C1',
-                'nama' => 'Tingkat Pendapatan',
-                'bobot' => 0.30,
+                'nama' => 'Wiraga',
+                'bobot' => 0.40,
             ],
             [
                 'kode' => 'C2',
-                'nama' => 'Jumlah Anggota Keluarga',
-                'bobot' => 0.25,
+                'nama' => 'Wirama',
+                'bobot' => 0.35,
             ],
             [
                 'kode' => 'C3',
-                'nama' => 'Status Pekerjaan',
-                'bobot' => 0.20,
-            ],
-            [
-                'kode' => 'C4',
-                'nama' => 'Kondisi Rumah',
-                'bobot' => 0.15,
-            ],
-            [
-                'kode' => 'C5',
-                'nama' => 'Kondisi Kesehatan',
-                'bobot' => 0.10,
+                'nama' => 'Wirasa',
+                'bobot' => 0.25,
             ]
         ]);
     }

@@ -1,5 +1,5 @@
 @extends('dashboard.master')
-@section('title', 'Data Penilaian - Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin Di Kelurahan Maleber')
+@section('title', 'Data Penilaian - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi')
 
 @section('custom-css')
 <style>
@@ -82,21 +82,21 @@
                                             </thead>
                                             <tbody>
                                                 @if($k->kode == 'C1')
-                                                    @foreach($tingkat_pendapatan as $tp)
+                                                    @foreach($wiraga as $tp)
                                                         <tr>
                                                             <td>{{$tp->range}}</td>
                                                             <td>{{$tp->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @elseif($k->kode == 'C2')
-                                                    @foreach($jumlah_anggota_keluarga as $jak)
+                                                    @foreach($wirama as $jak)
                                                         <tr>
                                                             <td>{{$jak->range}}</td>
                                                             <td>{{$jak->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @elseif($k->kode == 'C3')
-                                                    @foreach($status_pekerjaan as $sp)
+                                                    @foreach($wirasa as $sp)
                                                         <tr>
                                                             <td>{{$sp->range}}</td>
                                                             <td>{{$sp->nilai}}</td>

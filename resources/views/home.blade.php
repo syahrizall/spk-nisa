@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin Di Kelurahan Maleber</title>
+    <title>Sistem Pendukung Keputusan Penilaian Siswa Berprestasi</title>
     <link rel="shortcut icon" href="{{asset('guest/assets/images/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('guest/assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('guest/global.css')}}">
@@ -17,7 +17,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <img src="{{asset('guest/assets/images/logo.png')}}" alt="Logo">
-            <h1>SPK Bantuan Raskin</h1>
+            <h1>SPK Penilaian Siswa Berprestasi</h1>
         </div>
         <button class="mobile-menu-btn">
             <i class="fas fa-bars"></i>
@@ -39,8 +39,8 @@
         <article class="container reveal">
             <img class="rounded mx-auto d-block" src="{{asset('guest/assets/images/logo.png')}}" width="250px"
                 height="250px">
-            <h1>Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin</h1>
-            <h4>Studi Kasus : Kelurahan Maleber</h4>
+            <h1>Sistem Pendukung Keputusan Penilaian Siswa Berprestasi</h1>
+            <h4>Studi Kasus : Sanggar Tari Dua R Makalangan</h4>
         </article>
     </div>
 

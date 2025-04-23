@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kriteria;
-use App\Models\KondisiRumah;
 use Illuminate\Http\Request;
-use App\Models\StatusPekerjaan;
-use App\Models\KondisiKesehatan;
-use App\Models\TingkatPendapatan;
 use Illuminate\Support\Facades\DB;
-use App\Models\JumlahAnggotaKeluarga;
+use App\Models\Wiraga;
+use App\Models\Wirama;
+use App\Models\Wirasa;
 
 class KriteriaController extends Controller
 {
@@ -29,37 +27,15 @@ class KriteriaController extends Controller
     {
         $kriteria = Kriteria::all();
         
-        $tingkat_pendapatan = TingkatPendapatan::select('*', DB::raw("'C1' as kode"))->get();
-        $jumlah_anggota_keluarga = JumlahAnggotaKeluarga::select('*', DB::raw("'C2' as kode"))->get();
-        $status_pekerjaan = StatusPekerjaan::select('*', DB::raw("'C3' as kode"))->get();
-        $kondisi_rumah = KondisiRumah::select('*', DB::raw("'C4' as kode"))->get();
-        $kondisi_kesehatan = KondisiKesehatan::select('*', DB::raw("'C5' as kode"))->get();
+        $wiraga = Wiraga::select('*', DB::raw("'C1' as kode"))->get();
+        $wirama = Wirama::select('*', DB::raw("'C2' as kode"))->get();
+        $wirasa = Wirasa::select('*', DB::raw("'C3' as kode"))->get();
 
-        return view('dashboard.nilai.index', compact('kriteria', 'tingkat_pendapatan', 'jumlah_anggota_keluarga','status_pekerjaan', 'kondisi_rumah', 'kondisi_kesehatan'));
+        return view('dashboard.nilai.index', compact('kriteria', 'wiraga', 'wirama', 'wirasa'));
     }
-    public function indexTingkatPendapatan()
+    public function indexWiraga()
     {
-        $data = TingkatPendapatan::all();
-        return view('dashboard.tingkat_pendapatan.index', compact('data'));
-    }
-    public function indexJumlahAnggotaKeluarga()
-    {
-        $data = JumlahAnggotaKeluarga::all();
-        return view('dashboard.jumlah_anggota_keluarga.index', compact('data'));
-    }
-    public function indexStatusPekerjaan()
-    {
-        $data = StatusPekerjaan::all();
-        return view('dashboard.status_pekerjaan.index', compact('data'));
-    }
-    public function indexKondisiRumah()
-    {
-        $data = KondisiRumah::all();
-        return view('dashboard.kondisi_rumah.index', compact('data'));
-    }
-    public function indexKondisiKesehatan()
-    {
-        $data = KondisiKesehatan::all();
-        return view('dashboard.kondisi_kesehatan.index', compact('data'));
+        $data = Wiraga::all();
+        return view('dashboard.wiraga.index', compact('data'));
     }
 }

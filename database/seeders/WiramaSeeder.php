@@ -6,32 +6,32 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class TingkatPendapatanSeeder extends Seeder
+class WiramaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('m_tingkat_pendapatan')->insert([
+        DB::table('m_wirama')->insert([
             [
-                'range' => 'Lebih dari Rp 4.000.000 per bulan',
+                'range' => '10-50',
                 'nilai' => 1,
             ],
             [
-                'range' => 'Rp 3.000.000 - Rp 4.000.000 per bulan',
+                'range' => '51-60',
                 'nilai' => 2,
             ],
             [
-                'range' => 'Rp 2.000.000 - Rp 3.000.000 per bulan',
+                'range' => '61-70',
                 'nilai' => 3,
             ],
             [
-                'range' => 'Rp 1.000.000 - Rp 2.000.000 per bulan',
+                'range' => '71-80',
                 'nilai' => 4,
             ],
             [
-                'range' => 'Kurang dari Rp 1.000.000 per bulan',
+                'range' => '81-100',
                 'nilai' => 5,
             ]
         ]);

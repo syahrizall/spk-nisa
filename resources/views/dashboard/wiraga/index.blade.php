@@ -1,5 +1,5 @@
 @extends('dashboard.master')
-@section('title', 'Data Kondisi Kesehatan - Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin Di Kelurahan Maleber')
+@section('title', 'Data Wiraga - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi')
 
 @section('custom-css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
@@ -23,7 +23,7 @@
         <div class="col-lg-12 grid-margin marginResponsive">
             <div class="card">
                 <div class="card-body">
-                <h4 class="card-title">{{ __('Data Kondisi Kesehatan') }}</h4>
+                <h4 class="card-title">{{ __('Data Wiraga') }}</h4>
                     <div class="table-responsive">
                         <table id="dataTable" class="table">
                             <thead>

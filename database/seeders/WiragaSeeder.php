@@ -6,32 +6,32 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class KondisiRumahSeeder extends Seeder
+class WiragaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('m_kondisi_rumah')->insert([
+        DB::table('m_wiraga')->insert([
             [
-                'range' => 'Rumah permanen, kondisi baik',
+                'range' => '10-50',
                 'nilai' => 1,
             ],
             [
-                'range' => 'Rumah semi permanen, kondisi baik',
+                'range' => '51-60',
                 'nilai' => 2,
             ],
             [
-                'range' => 'Rumah semi permanen, kondisi kurang baik',
+                'range' => '61-70',
                 'nilai' => 3,
             ],
             [
-                'range' => 'Rumah tidak permanen, kondisi kurang baik',
+                'range' => '71-80',
                 'nilai' => 4,
             ],
             [
-                'range' => 'Rumah sangat sederhana, kondisi buruk',
+                'range' => '81-100',
                 'nilai' => 5,
             ]
         ]);

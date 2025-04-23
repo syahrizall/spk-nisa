@@ -7,11 +7,6 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\KriteriaSeeder;
 use Database\Seeders\PenerimaSeeder;
-use Database\Seeders\KondisiRumahSeeder;
-use Database\Seeders\StatusPekerjaanSeeder;
-use Database\Seeders\KondisiKesehatanSeeder;
-use Database\Seeders\TingkatPendapatanSeeder;
-use Database\Seeders\JumlahAnggotaKeluargaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,11 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KriteriaSeeder::class,
             UserSeeder::class,
-            JumlahAnggotaKeluargaSeeder::class,
-            KondisiKesehatanSeeder::class,
-            KondisiRumahSeeder::class,
-            StatusPekerjaanSeeder::class,
-            TingkatPendapatanSeeder::class,
+            WiragaSeeder::class,
+            WiramaSeeder::class,
+            WirasaSeeder::class,
             PenerimaSeeder::class,
             JumlahPenerimaSeeder::class,
             // Tambahkan Seeder lainnya di sini

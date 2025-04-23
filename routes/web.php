@@ -47,11 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bobot', [KriteriaController::class, 'indexBobot']);
     Route::put('/bobot-update/{id}', [KriteriaController::class, 'updateBobot'])->name('bobot.update');
     Route::get('/nilai', [KriteriaController::class, 'indexNilai']);
-    Route::get('/tingkat-pendapatan', [KriteriaController::class, 'indexTingkatPendapatan']);
-    Route::get('/jumlah-anggota-keluarga', [KriteriaController::class, 'indexJumlahAnggotaKeluarga']);
-    Route::get('/status-pekerjaan', [KriteriaController::class, 'indexStatusPekerjaan']);
-    Route::get('/kondisi-rumah', [KriteriaController::class, 'indexKondisiRumah']);
-    Route::get('/kondisi-kesehatan', [KriteriaController::class, 'indexKondisiKesehatan']);
+    Route::get('/wiraga', [KriteriaController::class, 'indexWiraga']);
 
     // pegawai
     Route::get('/penerima', [PenerimaController::class, 'index']);
