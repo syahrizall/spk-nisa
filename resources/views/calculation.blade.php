@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Calculation - Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin Di Kelurahan Maleber</title>
+    <title>Calculation - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi</title>
     <link rel="shortcut icon" href="{{asset('guest/assets/images/logo.png')}}" />
     <link rel="stylesheet" href="{{asset('guest/assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('guest/global.css')}}">
@@ -55,7 +55,7 @@
     <!--Main Body Content-->
     <div class="container mb-5">
         <div class="row reveal">
-            <h1 class="text-center">DATA PERHITUNGAN CALON PENERIMA BANTUAN RASKIN</h1>
+            <h1 class="text-center">DATA PERHITUNGAN CALON PESERTA TARI</h1>
             <hr/>
         </div>
         <div class="row reveal">
@@ -139,7 +139,7 @@
             borderRadius: 10
         },
         title: {
-            text: 'Hasil Perhitungan Calon Penerima Bantuan',
+            text: 'Hasil Perhitungan Calon Peserta',
             align: 'center'
         },
         xAxis: {
@@ -184,7 +184,7 @@
             borderRadius: 10
         },
         title: {
-            text: 'Penerima Bantuan Raskin',
+            text: 'Peserta Tari',
             align: 'center'
         },
         xAxis: {

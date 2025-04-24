@@ -1,5 +1,5 @@
 @extends('dashboard.master')
-@section('title', 'Dashboard - Sistem Pendukung Keputusan Kelayakan Penerimaan Bantuan Raskin Di Kelurahan Maleber')
+@section('title', 'Dashboard - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi')
 @section('custom-css')
 <style>
 .pegawai img, .ranking img {
@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <div class="row text-center pegawai">
                         <img src="{{asset('guest/assets/images/pegawai.png')}}">
-                        <h4>Jumlah Penerima Bantuan : {{$jumlah_penerima}}</h4>
+                        <h4>Jumlah Peserta : {{$jumlah_peserta}}</h4>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <div class="row text-center ranking mt-4">
                         <img src="{{asset('guest/assets/images/ranking.png')}}">
                         @if ($ranking1)
-                            <h4 class="mt-3">{{$ranking1->nama}}</h4>
+                            <h4 class="mt-3">{{$ranking1->nama_lengkap}}</h4>
                         @else
                             <h4 class="mt-3">Tidak Ada Data</h4>
                         @endif
@@ -72,11 +72,11 @@
                         </div>
                     @endif
                     <div class="row">
-                        <form action="{{ route('updateJumlahPenerima') }}" method="POST">
+                        <form action="{{ route('updateJumlahPeserta') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <h4>Update Jumlah Penerima:</h4>
-                                    <input type="number" class="form-control" id="jumlah_penerima" name="jumlah_penerima" value="{{$jumlah_penerima}}">
+                                    <h4>Update Jumlah Peserta:</h4>
+                                    <input type="number" class="form-control" id="jumlah_peserta" name="jumlah_peserta" value="{{$jumlah_peserta}}">
                                 </div>
                             <button type="submit" class="btn btn-primary mt-2">Update</button>
                         </form>
@@ -115,7 +115,7 @@ Highcharts.chart('chart1', {
         borderRadius: 10
     },
     title: {
-        text: 'Penerima Bantuan',
+        text: 'Peserta',
         align: 'center'
     },
     xAxis: {

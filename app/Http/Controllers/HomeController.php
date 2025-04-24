@@ -8,18 +8,18 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $jumlah_penerima = DB::table('m_jumlah_penerima')->value('jumlah');
+        $jumlah_peserta = DB::table('m_jumlah_peserta')->value('jumlah');
         $query = DB::table('t_nilai_akhir')
-            ->select('m_penerima.nama', 't_nilai_akhir.nilai_akhir')
-            ->join('m_penerima', 'm_penerima.id', '=', 't_nilai_akhir.penerima_id');
+            ->select('m_peserta.nama_lengkap', 't_nilai_akhir.nilai_akhir')
+            ->join('m_peserta', 'm_peserta.id', '=', 't_nilai_akhir.peserta_id');
 
         // Menggunakan pluck sekali untuk mengurangi query ke database
-        $dataAlternatif = $query->get()->pluck('nilai_akhir', 'nama');
+        $dataAlternatif = $query->get()->pluck('nilai_akhir', 'nama_lengkap');
         $dataAlternatifNama = $dataAlternatif->keys();
         $dataAlternatifData = $dataAlternatif->values();
 
         // Menggunakan pluck sekali untuk mengurangi query ke database
-        $sepuluhTerbesar = $query->orderBy('t_nilai_akhir.nilai_akhir', 'DESC')->take($jumlah_penerima)->get()->pluck('nilai_akhir', 'nama');
+        $sepuluhTerbesar = $query->orderBy('t_nilai_akhir.nilai_akhir', 'DESC')->take($jumlah_peserta)->get()->pluck('nilai_akhir', 'nama_lengkap');
         $sepuluhTerbesarNama = $sepuluhTerbesar->keys();
         $sepuluhTerbesarData = $sepuluhTerbesar->values();
 

@@ -41,7 +41,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     ///dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::post('/update-jumlah-penerima', [DashboardController::class, 'updateJumlahPenerima'])->name('updateJumlahPenerima');
+    Route::post('/update-jumlah-peserta', [DashboardController::class, 'updateJumlahPeserta'])->name('updateJumlahPeserta');
 
     // kriteria
     Route::get('/bobot', [KriteriaController::class, 'indexBobot']);
