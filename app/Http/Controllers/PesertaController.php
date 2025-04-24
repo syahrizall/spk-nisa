@@ -62,7 +62,7 @@ class PesertaController extends Controller
         $peserta = Peserta::findOrFail($id);
 
         $peserta->update([
-            'nama_lengkap'   => strtoupper($request->nama_lengkap),
+            'nama_lengkap'   => $request->nama_lengkap,
             'jenis_kelamin'  => $request->jenis_kelamin,
             'tanggal_lahir'  => $request->tanggal_lahir,
             'asal_sekolah'   => $request->asal_sekolah,

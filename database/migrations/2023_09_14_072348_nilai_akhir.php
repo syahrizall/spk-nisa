@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('t_nilai_akhir', function (Blueprint $table) {
             $table->id();
-            $table->integer('penerima_id');
-            $table->float('tingkat_pendapatan', 5, 3);
-            $table->float('jumlah_anggota_keluarga', 5, 3);
-            $table->float('status_pekerjaan', 5, 3);
-            $table->float('kondisi_rumah', 5, 3);
-            $table->float('kondisi_kesehatan', 5, 3);
+            $table->integer('peserta_id');
+            $table->float('wiraga', 5, 3);
+            $table->float('wirama', 5, 3);
+            $table->float('wirasa', 5, 3);
             $table->float('nilai_akhir', 5, 3);
             $table->timestamps();
         });
