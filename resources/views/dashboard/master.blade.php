@@ -152,7 +152,8 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{url('/nilai')}}">Nilai</a>
-                                <!-- </li>
+                                </li>
+                                <!--
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{url('/tingkat-pendapatan')}}">Tingkat Pendapatan</a>
                                 </li>
@@ -172,9 +173,9 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('/penerima')}}">
+                        <a class="nav-link" href="{{url('/peserta')}}">
                             <i class="mdi mdi-account menu-icon"></i>
-                            <span class="menu-title">Calon Penerima</span>
+                            <span class="menu-title">Calon Peserta</span>
                         </a>
                     </li>
                     <li class="nav-item">

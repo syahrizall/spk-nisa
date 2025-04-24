@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PenerimaController;
+use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\PerhitunganController;
 
 /*
@@ -49,11 +49,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/nilai', [KriteriaController::class, 'indexNilai']);
     Route::get('/wiraga', [KriteriaController::class, 'indexWiraga']);
 
-    // pegawai
-    Route::get('/penerima', [PenerimaController::class, 'index']);
-    Route::post('/penerima-store', [PenerimaController::class, 'store'])->name('createPenerima');
-    Route::put('/penerima-update/{id}', [PenerimaController::class, 'update'])->name('updatePenerima');
-    Route::get('/penerima-delete/{id}', [PenerimaController::class, 'delete'])->name('deletePenerima');
+    // peserta
+    Route::get('/peserta', [PesertaController::class, 'index']);
+    Route::post('/peserta-store', [PesertaController::class, 'store'])->name('createPeserta');
+    Route::put('/peserta-update/{id}', [PesertaController::class, 'update'])->name('updatePeserta');
+    Route::get('/peserta-delete/{id}', [PesertaController::class, 'delete'])->name('deletePeserta');
 
     // hasil perhitungan
     Route::get('/data-alternatif', [PerhitunganController::class, 'indexAlternatif']);

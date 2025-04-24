@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Peserta;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\KriteriaSeeder;
-use Database\Seeders\PenerimaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +28,7 @@ class DatabaseSeeder extends Seeder
             WiragaSeeder::class,
             WiramaSeeder::class,
             WirasaSeeder::class,
-            PenerimaSeeder::class,
+            PesertaSeeder::class,
             JumlahPenerimaSeeder::class,
             // Tambahkan Seeder lainnya di sini
         ]);

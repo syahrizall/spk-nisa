@@ -1,0 +1,57 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+class PesertaSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $names = [
+            "Aisyah Putri", "Ahmad Fauzan", "Budi Santoso", "Chandra Wijaya", "Dewi Lestari",
+            "Eka Saputra", "Fajar Ramadhan", "Gita Anjani", "Hani Ramadhani", "Indra Gunawan",
+            "Joko Susilo", "Kartini Astuti", "Lestari Wulandari", "Maya Anggraeni", "Nanda Pratama",
+            "Oki Setiawan", "Putri Amalia", "Qori Nurul", "Rizki Hidayat", "Sari Dewi",
+            "Toni Wahyudi", "Umar Said", "Vina Maharani", "Wawan Sugiarto", "Xena Ardiani",
+            "Yogi Pratama", "Zahra Salsabila", "Bagus Wibowo", "Citra Puspitasari", "Damar Prasetyo",
+            "Evi Nuraini", "Farhan Aditya", "Galuh Mahesa", "Hendra Kurniawan", "Ika Triana",
+            "Juli Hartono", "Kevin Anggara", "Linda Safitri", "Mira Susanti", "Novi Yuliani",
+            "Omar Hafidz", "Putu Mahendra", "Qais Alfarizi", "Rina Utami", "Sinta Maharani",
+            "Taufik Fadillah", "Uli Rahmawati", "Vera Melati", "Wahyu Priyono", "Xenia Putri"
+        ];
+
+        $schools = [
+            "SMAN 1 Bandung", "SMAN 2 Bandung", "SMAN 3 Bandung", "SMAN 4 Bandung", "SMAN 5 Bandung",
+            "SMAN 6 Bandung", "SMAN 7 Bandung", "SMAN 8 Bandung", "SMAN 9 Bandung", "SMAN 10 Bandung",
+            "Sanggar Tari Merak", "Sanggar Tari Kencana", "Sanggar Tari Nusantara", "Sanggar Tari Indah", "Sanggar Tari Gemilang",
+            "Komunitas Tari Modern", "Komunitas Tari Tradisional", "Komunitas Tari Kontemporer", "Komunitas Tari Kreasi", "Komunitas Tari Inovatif"
+        ];
+
+        $data = [];
+        foreach ($names as $name) {
+            $gender = rand(0, 1) ? 'Laki-laki' : 'Perempuan';
+            $birthDate = date('Y-m-d', strtotime('-' . rand(15, 25) . ' years'));
+            
+            $data[] = [
+                'nama_lengkap' => $name,
+                'jenis_kelamin' => $gender,
+                'tanggal_lahir' => $birthDate,
+                'asal_sekolah' => $schools[array_rand($schools)],
+                'nomor_hp' => '08' . rand(1000000000, 9999999999),
+                'wiraga' => rand(1, 5),
+                'wirama' => rand(1, 5),
+                'wirasa' => rand(1, 5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        DB::table('m_peserta')->insert($data);
+    }
+}
