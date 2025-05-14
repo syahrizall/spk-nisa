@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriPeserta;
 use Illuminate\Http\Request;
 use App\Models\Penerima;
 use App\Models\Peserta;
@@ -15,31 +16,34 @@ class PesertaController extends Controller
     public function index()
     {
         $data = DB::table('m_peserta')
-        ->select('m_peserta.*', 'm_wiraga.range as wiraga', 'm_wirama.range as wirama', 'm_wirasa.range as wirasa', 'm_wiraga.id as wiraga_id', 'm_wirama.id as wirama_id', 'm_wirasa.id as wirasa_id')
+        ->select('m_peserta.*', 'm_wiraga.range as wiraga', 'm_wirama.range as wirama', 'm_wirasa.range as wirasa', 'm_wiraga.id as wiraga_id', 'm_wirama.id as wirama_id', 'm_wirasa.id as wirasa_id', 'm_kategori_peserta.nama as kategori_peserta', 'm_kategori_peserta.id as kategori_peserta_id')
         ->join('m_wiraga', 'm_peserta.wiraga', '=', 'm_wiraga.id')
         ->join('m_wirama', 'm_peserta.wirama', '=', 'm_wirama.id')
         ->join('m_wirasa', 'm_peserta.wirasa', '=', 'm_wirasa.id')
+        ->join('m_kategori_peserta', 'm_peserta.kategori_peserta_id', '=', 'm_kategori_peserta.id')
         ->orderBy('m_peserta.nama_lengkap', 'ASC')
         ->get();
         // dd($data);
         $wiraga = Wiraga::all();
         $wirama = Wirama::all();
         $wirasa = Wirasa::all();
+        $kategori_peserta = KategoriPeserta::all();
 
-        return view('dashboard.peserta.index', compact('data', 'wiraga', 'wirama', 'wirasa'));
+        return view('dashboard.peserta.index', compact('data', 'wiraga', 'wirama', 'wirasa', 'kategori_peserta'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_lengkap'   => 'required|string|max:255',
-            'jenis_kelamin'  => 'required|in:Laki-laki,Perempuan',
-            'tanggal_lahir'  => 'required|date',
-            'asal_sekolah'   => 'required|string|max:255',
-            'nomor_hp'       => 'required|string|max:15',
-            'wiraga'         => 'required|string',
-            'wirama'         => 'required|string',
-            'wirasa'         => 'required|string',
+            'nama_lengkap'          => 'required|string|max:255',
+            'kategori_peserta_id'   => 'required',
+            'jenis_kelamin'         => 'required|in:Laki-laki,Perempuan',
+            'tanggal_lahir'         => 'required|date',
+            'asal_sekolah'          => 'required|string|max:255',
+            'nomor_hp'              => 'required|string|max:15',
+            'wiraga'                => 'required|string',
+            'wirama'                => 'required|string',
+            'wirasa'                => 'required|string',
         ]);
 
         Peserta::create($request->all());
@@ -49,27 +53,29 @@ class PesertaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_lengkap'   => 'required|string|max:255',
-            'jenis_kelamin'  => 'required|in:Laki-laki,Perempuan',
-            'tanggal_lahir'  => 'required|date',
-            'asal_sekolah'   => 'required|string|max:255',
-            'nomor_hp'       => 'required|string|max:15',
-            'wiraga'         => 'required|string',
-            'wirama'         => 'required|string',
-            'wirasa'         => 'required|string',
+            'nama_lengkap'          => 'required|string|max:255',
+            'kategori_peserta_id'   => 'required',
+            'jenis_kelamin'         => 'required|in:Laki-laki,Perempuan',
+            'tanggal_lahir'         => 'required|date',
+            'asal_sekolah'          => 'required|string|max:255',
+            'nomor_hp'              => 'required|string|max:15',
+            'wiraga'                => 'required|string',
+            'wirama'                => 'required|string',
+            'wirasa'                => 'required|string',
         ]);
 
         $peserta = Peserta::findOrFail($id);
 
         $peserta->update([
-            'nama_lengkap'   => $request->nama_lengkap,
-            'jenis_kelamin'  => $request->jenis_kelamin,
-            'tanggal_lahir'  => $request->tanggal_lahir,
-            'asal_sekolah'   => $request->asal_sekolah,
-            'nomor_hp'       => $request->nomor_hp,
-            'wiraga'         => $request->wiraga,
-            'wirama'         => $request->wirama,
-            'wirasa'         => $request->wirasa,
+            'nama_lengkap'          => $request->nama_lengkap,
+            'kategori_peserta_id'   => $request->kategori_peserta_id,
+            'jenis_kelamin'         => $request->jenis_kelamin,
+            'tanggal_lahir'         => $request->tanggal_lahir,
+            'asal_sekolah'          => $request->asal_sekolah,
+            'nomor_hp'              => $request->nomor_hp,
+            'wiraga'                => $request->wiraga,
+            'wirama'                => $request->wirama,
+            'wirasa'                => $request->wirasa,
         ]);
 
         return redirect('/peserta')->with('message', 'Data Berhasil Diperbarui');

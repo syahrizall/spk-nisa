@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             WirasaSeeder::class,
             PesertaSeeder::class,
             JumlahPesertaSeeder::class,
+            MKategoriPesertaSeeder::class,
             // Tambahkan Seeder lainnya di sini
         ]);
     }

@@ -172,7 +172,7 @@
                                         @if($totalBobot < 1)
                                             Tingkatkan nilai bobot hingga menjadi 1 sesuai pedoman rumus
                                         @elseif($totalBobot == 1)
-                                            Bobot sudah sesuai sesuai pedoman rumus
+                                            Bobot sudah sesuai pedoman rumus
                                         @else
                                             Kurangi nilai bobot hingga menjadi 1 sesuai pedoman rumus
                                         @endif

@@ -196,6 +196,27 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#event" aria-expanded="false"
+                            aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-calculator"></i>
+                            <span class="menu-title">Event</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="event">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('/tambah-event')}}">Tambah Event</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('/lihat-event')}}">Lihat Event</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
                 </ul>
             </nav>
             <div class="main-panel">

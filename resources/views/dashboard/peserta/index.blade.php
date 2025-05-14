@@ -42,6 +42,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Lengkap</th>
+                                    <th>Kategori</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Asal Sekolah</th>
@@ -60,6 +61,7 @@
                                     <tr>
                                         <td>{{$no++}}</td>
                                         <td>{{$row->nama_lengkap}}</td>
+                                        <td>{{$row->kategori_peserta}}</td>
                                         <td>{{$row->jenis_kelamin}}</td>
                                         <td>{{$row->tanggal_lahir}}</td>
                                         <td>{{$row->asal_sekolah}}</td>
@@ -104,6 +106,15 @@
                     <div class="mb-3">
                         <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                         <input type="text" name="nama_lengkap" class="form-control" required">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="kategori_peserta_id" class="form-label">Kategori Peserta</label>
+                        <select type="text" name="kategori_peserta_id" class="form-control">
+                            @foreach($kategori_peserta as $row)
+                                <option value="{{$row->id}}">{{$row->nama}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-3">
@@ -185,6 +196,19 @@
                             <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                             <input type="text" name="nama_lengkap" class="form-control" required
                                 style="text-transform: capitalize;" value="{{ $row->nama_lengkap }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="kategori_peserta_id" class="form-label">Kategori Peserta</label>
+                            <select name="kategori_peserta_id" class="form-control">
+                            <option value="{{$row->kategori_peserta_id}}">{{$row->kategori_peserta}}</option>
+                            <option value="" disabled>=============================</option>
+                                @foreach($kategori_peserta as $rows)
+                                    <option value="{{ $rows->id }}">
+                                        {{ $rows->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="mb-3">

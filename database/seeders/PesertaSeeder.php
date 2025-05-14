@@ -47,6 +47,7 @@ class PesertaSeeder extends Seeder
                 'wiraga' => rand(1, 5),
                 'wirama' => rand(1, 5),
                 'wirasa' => rand(1, 5),
+                'kategori_peserta_id' => rand(1, 3), // ✅ Tambahan ini
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

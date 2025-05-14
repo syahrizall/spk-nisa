@@ -13,22 +13,36 @@ class PerhitunganController extends Controller
     public function indexAlternatif()
     {
         $data = DB::table('t_data_alternatif')
-        ->select('t_data_alternatif.*', 'm_peserta.nama_lengkap as nama_peserta')
-        ->join('m_peserta', 't_data_alternatif.peserta_id', '=', 'm_peserta.id')
-        ->orderBy('m_peserta.nama_lengkap', 'ASC')
-        ->get();
+            ->select(
+                't_data_alternatif.*',
+                'm_peserta.nama_lengkap as nama_peserta',
+                'm_kategori_peserta.id as kategori_id',
+                'm_kategori_peserta.nama as kategori_peserta'
+            )
+            ->join('m_peserta', 't_data_alternatif.peserta_id', '=', 'm_peserta.id')
+            ->join('m_kategori_peserta', 'm_peserta.kategori_peserta_id', '=', 'm_kategori_peserta.id')
+            ->orderBy('m_kategori_peserta.nama', 'ASC')
+            ->orderBy('m_peserta.nama_lengkap', 'ASC')
+            ->get()
+            ->groupBy('kategori_peserta'); // ✅ Grouping by nama kategori
+
         return view('dashboard.data-alternatif.index', compact('data'));
     }
 
+
     public function indexRanking()
     {
-        $data = DB::table('t_nilai_akhir')
-        ->select('t_nilai_akhir.*', 'm_peserta.nama_lengkap as nama_peserta')
-        ->join('m_peserta', 't_nilai_akhir.peserta_id', '=', 'm_peserta.id')
-        ->orderBy('t_nilai_akhir.nilai_akhir', 'DESC')
-        ->get();
+        $rawData = DB::table('t_nilai_akhir')
+            ->select('t_nilai_akhir.*', 'm_peserta.nama_lengkap as nama_peserta', 'm_kategori_peserta.nama as kategori_peserta')
+            ->join('m_peserta', 't_nilai_akhir.peserta_id', '=', 'm_peserta.id')
+            ->join('m_kategori_peserta', 'm_peserta.kategori_peserta_id', '=', 'm_kategori_peserta.id')
+            ->orderBy('t_nilai_akhir.nilai_akhir', 'DESC')
+            ->get();
+
+        $data = $rawData->groupBy('kategori_peserta');
         return view('dashboard.data-ranking.index', compact('data'));
     }
+
 
     public function refreshRanking()
     {

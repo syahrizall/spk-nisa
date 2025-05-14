@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\PerhitunganController;
 
@@ -59,4 +60,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/data-alternatif', [PerhitunganController::class, 'indexAlternatif']);
     Route::get('/refresh-ranking', [PerhitunganController::class, 'refreshRanking'])->name('refreshRanking');
     Route::get('/data-ranking', [PerhitunganController::class, 'indexRanking']);
+
+    // event
+    Route::get('/tambah-event', [EventController::class, 'tambahEvent'])->name('tambah-event');
+    Route::post('/event-store', [EventController::class, 'store'])->name('createEvent');
+    Route::put('/event-update/{id}', [EventController::class, 'update'])->name('updateEvent');
+    Route::get('/event-delete/{id}', [EventController::class, 'delete'])->name('deleteEvent');
+    Route::get('/lihat-event', [EventController::class, 'lihatEvent'])->name('lihat-event');
+    Route::put('/event/update-peserta', [EventController::class, 'updatePesertaEvent'])->name('updatePesertaEvent');
+
 });
