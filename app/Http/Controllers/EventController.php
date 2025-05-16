@@ -23,7 +23,6 @@ class EventController extends Controller
         return view('dashboard.event.index', compact('data', 'kategoriPeserta'));
 
     }
-
     public function lihatEvent()
     {
         // Ambil event beserta peserta dan nama kategori peserta

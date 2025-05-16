@@ -6,7 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Kriteria - Sistem Pendukung Keputusan Penilaian Siswa Berprestasi</title>
+    
+    <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('guest/assets/images/logo.png')}}" />
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="{{asset('guest/assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('guest/global.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />

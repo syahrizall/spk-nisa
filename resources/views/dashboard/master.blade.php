@@ -200,7 +200,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#event" aria-expanded="false"
                             aria-controls="ui-basic">
-                            <i class="menu-icon mdi mdi-calculator"></i>
+                            <i class="menu-icon mdi mdi-calendar"></i>
                             <span class="menu-title">Event</span>
                             <i class="menu-arrow"></i>
                         </a>
