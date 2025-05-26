@@ -21,7 +21,7 @@
     <nav class="navbar">
         <div class="navbar-brand">
             <img src="{{asset('guest/assets/images/logo.png')}}" alt="Logo">
-            <h1>SPK Siswa Berprestasi</h1>
+            <h1>SPK Penilaian Siswa Berprestasi</h1>
         </div>
         
         <button class="mobile-menu-btn">
