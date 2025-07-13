@@ -40,7 +40,7 @@
             <img class="rounded mx-auto d-block" src="{{asset('guest/assets/images/logo.png')}}" width="250px"
                 height="250px">
             <h1>Sistem Pendukung Keputusan Penilaian Siswa Berprestasi</h1>
-            <h4>Studi Kasus : Sanggar Tari Dua R Makalangan</h4>
+            {{-- <h4>Studi Kasus : Sanggar Tari Dua R Makalangan</h4> --}}
         </article>
     </div>
 
