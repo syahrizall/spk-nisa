@@ -60,25 +60,91 @@
                 <li class="card">
                     <div class="icon"><i class="fa-solid fa-person-walking"></i></div>
                     <div class="card-content">
-                        <div class="title">C1 - Wiraga (Gerak)</div>
+                        <div class="title">C1 - Wiraga (25%)</div>
                         <div class="content">Wiraga adalah unsur tari yang menekankan pada keindahan dan ketepatan gerak tubuh penari. Gerakan harus luwes, kuat, dan sesuai dengan teknik atau pakem tari yang dibawakan.</div>
                     </div>
                 </li>
                 <li class="card">
                     <div class="icon"><i class="fa-solid fa-water"></i></div>
                     <div class="card-content">
-                        <div class="title">C2 - Wirama (Irama)</div>
+                        <div class="title">C2 - Wirama (20%)</div>
                         <div class="content">Wirama adalah kesesuaian gerak tari dengan irama musik atau ketukan iringan. Penari harus mampu menyesuaikan tempo gerakan dengan perubahan dinamika musik.</div>
                     </div>
                 </li>
                 <li class="card">
                     <div class="icon"><i class="fa-solid fa-ear-listen"></i></div>
                     <div class="card-content">
-                        <div class="title">C3 - Wirasa (Rasa)</div>
+                        <div class="title">C3 - Wirasa (15%)</div>
                         <div class="content">Wirasa adalah penjiwaan dan ekspresi yang ditampilkan oleh penari agar makna tari terasa oleh penonton. Emosi dan karakter harus disampaikan melalui ekspresi wajah dan gerakan tubuh.</div>
                     </div>
                 </li>
+                <li class="card">
+                    <div class="icon"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="card-content">
+                        <div class="title">C4 - Pengalaman (25%)</div>
+                        <div class="content">Pengalaman mengikuti lomba dan prestasi yang pernah diraih. Semakin banyak pengalaman lomba, semakin baik kemampuan dan kesiapan peserta.</div>
+                    </div>
+                </li>
+                <li class="card">
+                    <div class="icon"><i class="fa-solid fa-calendar-times"></i></div>
+                    <div class="card-content">
+                        <div class="title">C5 - Ketidakhadiran (15%)</div>
+                        <div class="content">Jumlah ketidakhadiran dalam latihan. Semakin sedikit ketidakhadiran, semakin baik kedisiplinan dan komitmen peserta.</div>
+                    </div>
+                </li>
             </ul>
+            
+            <!-- Summary Bobot -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                        <div class="card-body text-center">
+                            <h4 class="mb-3"><i class="fa-solid fa-calculator"></i> Total Bobot Kriteria</h4>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="bobot-item">
+                                        <h5>Wiraga</h5>
+                                        <span class="badge bg-light text-dark">25%</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="bobot-item">
+                                        <h5>Wirama</h5>
+                                        <span class="badge bg-light text-dark">20%</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="bobot-item">
+                                        <h5>Wirasa</h5>
+                                        <span class="badge bg-light text-dark">15%</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="bobot-item">
+                                        <h5>Pengalaman</h5>
+                                        <span class="badge bg-light text-dark">25%</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="bobot-item">
+                                        <h5>Ketidakhadiran</h5>
+                                        <span class="badge bg-light text-dark">15%</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="bobot-item">
+                                        <h5>Total</h5>
+                                        <span class="badge bg-success">100%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 mb-0">
+                                <small><i class="fa-solid fa-info-circle"></i> Total bobot kriteria harus sama dengan 100% sesuai dengan metode Weighted Product (WP)</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

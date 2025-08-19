@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\PerhitunganController;
+use App\Http\Controllers\RiwayatEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,5 +69,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/event-delete/{id}', [EventController::class, 'delete'])->name('deleteEvent');
     Route::get('/lihat-event', [EventController::class, 'lihatEvent'])->name('lihat-event');
     Route::put('/event/update-peserta', [EventController::class, 'updatePesertaEvent'])->name('updatePesertaEvent');
+    Route::get('/event/{id}/mark-completed', [EventController::class, 'markAsCompleted'])->name('markEventCompleted');
 
+    // riwayat event
+    Route::get('/riwayat-event', [RiwayatEventController::class, 'index'])->name('riwayat-event.index');
 });

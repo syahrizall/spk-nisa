@@ -38,16 +38,25 @@ class PesertaSeeder extends Seeder
             $gender = rand(0, 1) ? 'Laki-laki' : 'Perempuan';
             $birthDate = date('Y-m-d', strtotime('-' . rand(15, 25) . ' years'));
             
+            // Generate nilai yang sesuai dengan tabel referensi (1-5)
+            $wiraga = rand(1, 5);        // Range 1-5 sesuai tabel referensi
+            $wirama = rand(1, 5);        // Range 1-5 sesuai tabel referensi
+            $wirasa = rand(1, 5);        // Range 1-5 sesuai tabel referensi
+            $pengalaman = rand(0, 8);    // 0-8 lomba (nilai langsung)
+            $ketidakhadiran = rand(0, 15); // 0-15 hari tidak hadir (nilai langsung)
+            
             $data[] = [
                 'nama_lengkap' => $name,
                 'jenis_kelamin' => $gender,
                 'tanggal_lahir' => $birthDate,
                 'asal_sekolah' => $schools[array_rand($schools)],
                 'nomor_hp' => '08' . rand(1000000000, 9999999999),
-                'wiraga' => rand(1, 5),
-                'wirama' => rand(1, 5),
-                'wirasa' => rand(1, 5),
-                'kategori_peserta_id' => rand(1, 3), // ✅ Tambahan ini
+                'wiraga' => $wiraga,           // ID dari tabel referensi (1-5)
+                'wirama' => $wirama,           // ID dari tabel referensi (1-5)
+                'wirasa' => $wirasa,           // ID dari tabel referensi (1-5)
+                'kategori_peserta_id' => rand(1, 3),
+                'pengalaman' => $pengalaman,   // Nilai langsung (0-8)
+                'ketidakhadiran' => $ketidakhadiran, // Nilai langsung (0-15)
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

@@ -82,8 +82,17 @@ class DashboardController extends Controller
             $kategoriCharts[$kategoriId] = [
                 'kategori_nama' => $participants->first()->kategori_nama,
                 'nama_peserta' => $participants->pluck('nama_lengkap'),
-                'nilai_akhir' => $participants->pluck('nilai_akhir')
+                'nilai_akhir' => $participants->pluck('nilai_akhir'),
+                'max_value' => $participants->max('nilai_akhir') // Tambahkan max value dinamis
             ];
+        }
+
+        // Hitung max value global untuk semua chart
+        $globalMaxValue = DB::table('t_nilai_akhir')->max('nilai_akhir');
+        
+        // Jika tidak ada data, set default
+        if (!$globalMaxValue) {
+            $globalMaxValue = 1;
         }
 
         return view('dashboard.dashboard', compact([
@@ -91,7 +100,8 @@ class DashboardController extends Controller
             'rankingAll', 
             'pesertaPerKategori',
             'eventCharts',
-            'kategoriCharts'
+            'kategoriCharts',
+            'globalMaxValue' // Tambahkan global max value
         ]));
     }
 

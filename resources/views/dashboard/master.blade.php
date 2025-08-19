@@ -212,6 +212,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{url('/lihat-event')}}">Lihat Event</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('/riwayat-event')}}">Riwayat Event</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

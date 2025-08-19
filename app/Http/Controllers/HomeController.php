@@ -26,9 +26,11 @@ class HomeController extends Controller
         $kategoriCharts = [];
         foreach ($pesertaPerKategoriChart as $kategoriId => $participants) {
             $kategoriCharts[$kategoriId] = [
+                'kategori_id' => $kategoriId,
                 'kategori_nama' => $participants->first()->kategori_nama,
                 'nama_peserta' => $participants->pluck('nama_lengkap'),
-                'nilai_akhir' => $participants->pluck('nilai_akhir')
+                'nilai_akhir' => $participants->pluck('nilai_akhir'),
+                'max_value' => $participants->max('nilai_akhir') // Tambahkan max value dinamis
             ];
         }
 
@@ -51,15 +53,26 @@ class HomeController extends Controller
         $eventCharts = [];
         foreach ($eventData as $eventId => $participants) {
             $eventCharts[$eventId] = [
+                'event_id' => $eventId,
                 'event_nama' => $participants->first()->event_nama,
                 'nama_peserta' => $participants->pluck('nama_lengkap'),
-                'nilai_akhir' => $participants->pluck('nilai_akhir')
+                'nilai_akhir' => $participants->pluck('nilai_akhir'),
+                'max_value' => $participants->max('nilai_akhir') // Tambahkan max value dinamis
             ];
+        }
+
+        // Hitung max value global untuk semua chart
+        $globalMaxValue = DB::table('t_nilai_akhir')->max('nilai_akhir');
+        
+        // Jika tidak ada data, set default
+        if (!$globalMaxValue) {
+            $globalMaxValue = 1;
         }
 
         return view('calculation', compact(
             'kategoriCharts',
-            'eventCharts'
+            'eventCharts',
+            'globalMaxValue' // Tambahkan global max value
         ));
     }
 }

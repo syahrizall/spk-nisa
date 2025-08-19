@@ -107,6 +107,8 @@
                                             <th>Wiraga</th>
                                             <th>Wirama</th>
                                             <th>Wirasa</th>
+                                            <th>Pengalaman</th>
+                                            <th>Ketidakhadiran</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -115,9 +117,11 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $row->nama_peserta }}</td>
-                                                <td>{{ $row->wiraga }}</td>
-                                                <td>{{ $row->wirama }}</td>
-                                                <td>{{ $row->wirasa }}</td>
+                                                <td>{{ number_format($row->wiraga, 3) }}</td>
+                                                <td>{{ number_format($row->wirama, 3) }}</td>
+                                                <td>{{ number_format($row->wirasa, 3) }}</td>
+                                                <td>{{ number_format($row->pengalaman, 3) }}</td>
+                                                <td>{{ number_format($row->ketidakhadiran, 3) }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

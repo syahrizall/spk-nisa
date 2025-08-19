@@ -51,6 +51,29 @@
 .card-bobot-content tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+.badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.card-keterangan {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
 </style>
 @endsection
 
@@ -66,12 +89,18 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ __('Data Bobot') }}</h4>
+                    <h4 class="card-title">{{ __('Data Nilai Kriteria') }}</h4>
                     <div class="row">
                         @foreach($kriteria as $k)
                             <div class="col-md-6 mb-4">
                                 <div class="card-bobot">
-                                    <h5 class="card-bobot-title">{{$k->kode}} | {{$k->nama}}</h5>
+                                    <h5 class="card-bobot-title">{{$k->kode}} | {{$k->nama}} 
+                                        @if($k->vektor == 'v')
+                                            <span class="badge badge-success">Benefit</span>
+                                        @else
+                                            <span class="badge badge-warning">Cost</span>
+                                        @endif
+                                    </h5>
                                     <div class="card-bobot-content">
                                         <table>
                                             <thead>
@@ -82,44 +111,51 @@
                                             </thead>
                                             <tbody>
                                                 @if($k->kode == 'C1')
-                                                    @foreach($wiraga as $tp)
+                                                    @foreach($wiraga as $item)
                                                         <tr>
-                                                            <td>{{$tp->range}}</td>
-                                                            <td>{{$tp->nilai}}</td>
+                                                            <td>{{$item->range}}</td>
+                                                            <td>{{$item->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @elseif($k->kode == 'C2')
-                                                    @foreach($wirama as $jak)
+                                                    @foreach($wirama as $item)
                                                         <tr>
-                                                            <td>{{$jak->range}}</td>
-                                                            <td>{{$jak->nilai}}</td>
+                                                            <td>{{$item->range}}</td>
+                                                            <td>{{$item->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @elseif($k->kode == 'C3')
-                                                    @foreach($wirasa as $sp)
+                                                    @foreach($wirasa as $item)
                                                         <tr>
-                                                            <td>{{$sp->range}}</td>
-                                                            <td>{{$sp->nilai}}</td>
+                                                            <td>{{$item->range}}</td>
+                                                            <td>{{$item->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @elseif($k->kode == 'C4')
-                                                    @foreach($kondisi_rumah as $kr)
+                                                    @foreach($pengalaman as $item)
                                                         <tr>
-                                                            <td>{{$kr->range}}</td>
-                                                            <td>{{$kr->nilai}}</td>
+                                                            <td>{{$item->range}}</td>
+                                                            <td>{{$item->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @elseif($k->kode == 'C5')
-                                                    @foreach($kondisi_kesehatan as $kk)
+                                                    @foreach($ketidakhadiran as $item)
                                                         <tr>
-                                                            <td>{{$kk->range}}</td>
-                                                            <td>{{$kk->nilai}}</td>
+                                                            <td>{{$item->range}}</td>
+                                                            <td>{{$item->nilai}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @endif
                                             </tbody>
                                         </table>
                                     </div>
+                                    @if($k->keterangan)
+                                        <div class="card-keterangan">
+                                            <small class="text-muted">
+                                                <i class="ti-info-alt"></i> {{$k->keterangan}}
+                                            </small>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

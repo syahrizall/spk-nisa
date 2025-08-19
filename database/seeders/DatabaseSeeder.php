@@ -20,15 +20,30 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
+            // Seeder untuk master data
+            MKategoriPesertaSeeder::class,
             KriteriaSeeder::class,
-            UserSeeder::class,
+            
+            // Seeder untuk referensi nilai kriteria (diperlukan untuk perhitungan)
             WiragaSeeder::class,
             WiramaSeeder::class,
             WirasaSeeder::class,
-            PesertaSeeder::class,
+            PengalamanSeeder::class,
+            KetidakhadiranSeeder::class,
+            
+            // Seeder untuk user dan data awal
+            UserSeeder::class,
             JumlahPesertaSeeder::class,
-            MKategoriPesertaSeeder::class,
-            // Tambahkan Seeder lainnya di sini
+            
+            // Seeder untuk data peserta (50 data random)
+            PesertaSeeder::class,
+            
+            // Seeder untuk event dan peserta lomba
+            EventSeeder::class,
+            PesertaLombaPerEventSeeder::class,
+            
+            // Catatan: Seeder Wiraga, Wirama, Wirasa tetap diperlukan
+            // untuk konversi nilai input ke range yang sesuai saat perhitungan
         ]);
     }
 }

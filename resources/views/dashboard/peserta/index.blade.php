@@ -50,6 +50,8 @@
                                     <th>Wiraga</th>
                                     <th>Wirama</th>
                                     <th>Wirasa</th>
+                                    <th>Pengalaman</th>
+                                    <th>Ketidakhadiran</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -69,6 +71,8 @@
                                         <td>{{$row->wiraga}}</td>
                                         <td>{{$row->wirama}}</td>
                                         <td>{{$row->wirasa}}</td>
+                                        <td>{{$row->pengalaman}}</td>
+                                        <td>{{$row->ketidakhadiran}}</td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-dark btn-sm btn-rounded btn-icon-prepend"
                                                 data-toggle="modal" data-target="#edit{{$row->id}}">
@@ -142,28 +146,29 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="wiraga" class="form-label">Wiraga</label>
-                        <select type="text" name="wiraga" class="form-control">
-                            @foreach($wiraga as $row)
-                                <option value="{{$row->id}}">{{$row->range}}</option>
-                            @endforeach
-                        </select>
+                        <label for="wiraga" class="form-label">Wiraga (0-100)</label>
+                        <input type="number" name="wiraga" class="form-control" min="0" max="100" step="0.01" required>
+                        <small class="form-text text-muted">Masukkan nilai antara 0-100</small>
                     </div>
                     <div class="mb-3">
-                        <label for="wirama" class="form-label">Wirama</label>
-                        <select type="text" name="wirama" class="form-control">
-                            @foreach($wirama as $row)
-                                <option value="{{$row->id}}">{{$row->range}}</option>
-                            @endforeach
-                        </select>
+                        <label for="wirama" class="form-label">Wirama (0-100)</label>
+                        <input type="number" name="wirama" class="form-control" min="0" max="100" step="0.01" required>
+                        <small class="form-text text-muted">Masukkan nilai antara 0-100</small>
                     </div>
                     <div class="mb-3">
-                        <label for="wirasa" class="form-label">Wirasa</label>
-                        <select type="text" name="wirasa" class="form-control">
-                            @foreach($wirasa as $row)
-                                <option value="{{$row->id}}">{{$row->range}}</option>
-                            @endforeach
-                        </select>
+                        <label for="wirasa" class="form-label">Wirasa (0-100)</label>
+                        <input type="number" name="wirasa" class="form-control" min="0" max="100" step="0.01" required>
+                        <small class="form-text text-muted">Masukkan nilai antara 0-100</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pengalaman" class="form-label">Pengalaman Lomba (0-10)</label>
+                        <input type="number" name="pengalaman" class="form-control" min="0" max="10" step="1" required>
+                        <small class="form-text text-muted">Jumlah lomba yang pernah diikuti</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ketidakhadiran" class="form-label">Ketidakhadiran (0-30)</label>
+                        <input type="number" name="ketidakhadiran" class="form-control" min="0" max="30" step="1" required>
+                        <small class="form-text text-muted">Jumlah hari tidak hadir latihan</small>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -239,42 +244,38 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="wiraga" class="form-label">Wiraga</label>
-                            <select name="wiraga" class="form-control">
-                            <option value="{{$row->wiraga_id}}">{{$row->wiraga}}</option>
-                            <option value="" disabled>=============================</option>
-                                @foreach($wiraga as $rows)
-                                    <option value="{{ $rows->id }}">
-                                        {{ $rows->range }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="wiraga" class="form-label">Wiraga (0-100)</label>
+                            <input type="number" name="wiraga" class="form-control" min="0" max="100" step="0.01" required
+                                value="{{ $row->wiraga }}">
+                            <small class="form-text text-muted">Masukkan nilai antara 0-100</small>
                         </div>
 
                         <div class="mb-3">
-                            <label for="wirama" class="form-label">Wirama</label>
-                            <select name="wirama" class="form-control">
-                            <option value="{{$row->wirama_id}}">{{$row->wirama}}</option>
-                            <option value="" disabled>=============================</option>
-                                @foreach($wirama as $rows)
-                                    <option value="{{ $rows->id }}" {{ $row->wirama == $rows->id ? 'selected' : '' }}>
-                                        {{ $rows->range }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="wirama" class="form-label">Wirama (0-100)</label>
+                            <input type="number" name="wirama" class="form-control" min="0" max="100" step="0.01" required
+                                value="{{ $row->wirama }}">
+                            <small class="form-text text-muted">Masukkan nilai antara 0-100</small>
                         </div>
 
                         <div class="mb-3">
-                            <label for="wirasa" class="form-label">Wirasa</label>
-                            <select name="wirasa" class="form-control">
-                            <option value="{{$row->wirasa_id}}">{{$row->wirasa}}</option>
-                            <option value="" disabled>=============================</option>
-                                @foreach($wirasa as $rows)
-                                    <option value="{{ $rows->id }}" {{ $row->wirasa == $rows->id ? 'selected' : '' }}>
-                                        {{ $rows->range }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="wirasa" class="form-label">Wirasa (0-100)</label>
+                            <input type="number" name="wirasa" class="form-control" min="0" max="100" step="0.01" required
+                                value="{{ $row->wirasa }}">
+                            <small class="form-text text-muted">Masukkan nilai antara 0-100</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="pengalaman" class="form-label">Pengalaman Lomba (0-10)</label>
+                            <input type="number" name="pengalaman" class="form-control" min="0" max="10" step="1" required
+                                value="{{ $row->pengalaman }}">
+                            <small class="form-text text-muted">Jumlah lomba yang pernah diikuti</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ketidakhadiran" class="form-label">Ketidakhadiran (0-30)</label>
+                            <input type="number" name="ketidakhadiran" class="form-control" min="0" max="30" step="1" required
+                                value="{{ $row->ketidakhadiran }}">
+                            <small class="form-text text-muted">Jumlah hari tidak hadir latihan</small>
                         </div>
                     </div>
 

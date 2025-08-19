@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\PesertaLombaPerEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,21 +22,23 @@ class EventController extends Controller
             ->get();
 
         return view('dashboard.event.index', compact('data', 'kategoriPeserta'));
-
     }
+    
     public function lihatEvent()
     {
-        // Ambil event beserta peserta dan nama kategori peserta
+        // Ambil event aktif beserta peserta dan nama kategori peserta
         $events = DB::table('m_event as e')
             ->join('t_peserta_lomba_per_event as ple', 'e.id', '=', 'ple.event_id')
             ->join('m_peserta as p', 'ple.peserta_id', '=', 'p.id')
             ->leftJoin('m_kategori_peserta as k', 'e.kategori_peserta_id', '=', 'k.id')
+            ->where('e.status', 'aktif') // Hanya tampilkan event yang aktif
             ->select(
                 'e.id as event_id',
                 'e.nama as event_nama',
                 'e.kuota',
                 'e.tanggal',
                 'e.kategori_peserta_id',
+                'e.status',
                 'k.nama as kategori_nama',
                 'p.id as peserta_id',
                 'p.nama_lengkap as peserta_nama'
@@ -65,17 +68,27 @@ class EventController extends Controller
         return view('dashboard.event.lihat-event', compact('events', 'pesertaEventCountByMonth', 'allPeserta'));
     }
 
-
-
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kuota' => 'required|integer|min:1|max:100',
+            'tanggal' => 'required|date|after_or_equal:today',
+            'kategori_peserta_id' => 'required|exists:m_kategori_peserta,id',
+            'deskripsi' => 'nullable|string|max:1000',
+            'lokasi' => 'nullable|string|max:255',
+        ]);
+
         DB::transaction(function () use ($request) {
             // 1. Insert event beserta kategori_peserta_id
             $event = Event::create([
                 'nama' => $request->nama,
                 'kuota' => $request->kuota,
                 'tanggal' => $request->tanggal,
-                'kategori_peserta_id' => $request->kategori_peserta_id, // tambahkan kolom ini di form jika belum
+                'kategori_peserta_id' => $request->kategori_peserta_id,
+                'status' => 'aktif',
+                'deskripsi' => $request->deskripsi,
+                'lokasi' => $request->lokasi,
             ]);
 
             // 2. Ambil peserta_id berdasarkan nilai_akhir tertinggi dan kategori yang dipilih
@@ -96,7 +109,9 @@ class EventController extends Controller
                 ];
             })->toArray();
 
-            DB::table('t_peserta_lomba_per_event')->insert($data);
+            if (!empty($data)) {
+                DB::table('t_peserta_lomba_per_event')->insert($data);
+            }
         });
 
         return redirect('/tambah-event')->with('message', 'Data Berhasil Disimpan');
@@ -104,6 +119,15 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kuota' => 'required|integer|min:1|max:100',
+            'tanggal' => 'required|date',
+            'kategori_peserta_id' => 'required|exists:m_kategori_peserta,id',
+            'deskripsi' => 'nullable|string|max:1000',
+            'lokasi' => 'nullable|string|max:255',
+        ]);
+
         DB::transaction(function () use ($request, $id) {
             // 1. Update event
             $event = Event::findOrFail($id);
@@ -111,7 +135,9 @@ class EventController extends Controller
                 'nama' => $request->nama,
                 'kuota' => $request->kuota,
                 'tanggal' => $request->tanggal,
-                'kategori_peserta_id' => $request->kategori_peserta_id, // Pastikan field ini ada di form
+                'kategori_peserta_id' => $request->kategori_peserta_id,
+                'deskripsi' => $request->deskripsi,
+                'lokasi' => $request->lokasi,
             ]);
 
             // 2. Hapus peserta lama dari event ini
@@ -137,15 +163,22 @@ class EventController extends Controller
                 ];
             })->toArray();
 
-            DB::table('t_peserta_lomba_per_event')->insert($data);
+            if (!empty($data)) {
+                DB::table('t_peserta_lomba_per_event')->insert($data);
+            }
         });
 
         return redirect('/tambah-event')->with('message', 'Data Berhasil Diperbarui');
     }
 
-
     public function updatePesertaEvent(Request $request)
     {
+        $request->validate([
+            'event_id' => 'required|exists:m_event,id',
+            'old_peserta_id' => 'required|exists:m_peserta,id',
+            'new_peserta_id' => 'required|exists:m_peserta,id',
+        ]);
+
         DB::table('t_peserta_lomba_per_event')
             ->where('event_id', $request->event_id)
             ->where('peserta_id', $request->old_peserta_id)
@@ -169,5 +202,16 @@ class EventController extends Controller
         });
 
         return redirect('/tambah-event')->with('message', 'Data Berhasil Dihapus');
+    }
+
+    /**
+     * Mark event as completed
+     */
+    public function markAsCompleted($id)
+    {
+        $event = Event::findOrFail($id);
+        $event->update(['status' => 'selesai']);
+        
+        return redirect()->back()->with('message', 'Event berhasil ditandai sebagai selesai');
     }
 }

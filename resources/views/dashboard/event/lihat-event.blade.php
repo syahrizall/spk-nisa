@@ -80,10 +80,21 @@
 
                 @foreach ($events as $eventId => $eventGroup)
                     <div class="event-header">
-                        <strong>📌 {{ $eventGroup->first()->event_nama }}</strong><br>
-                        📊 Kuota: {{ $eventGroup->first()->kuota }} |
-                        📅 Tanggal: {{ \Carbon\Carbon::parse($eventGroup->first()->tanggal)->format('d-m-Y') }} |
-                        🏷️ Kategori: {{ $eventGroup->first()->kategori_nama }}
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>📌 {{ $eventGroup->first()->event_nama }}</strong><br>
+                                📊 Kuota: {{ $eventGroup->first()->kuota }} |
+                                📅 Tanggal: {{ \Carbon\Carbon::parse($eventGroup->first()->tanggal)->format('d-m-Y') }} |
+                                🏷️ Kategori: {{ $eventGroup->first()->kategori_nama }}
+                            </div>
+                            <div>
+                                <a href="{{ route('markEventCompleted', ['id' => $eventId]) }}" 
+                                   class="btn btn-success btn-sm"
+                                   onclick="return confirm('Apakah anda yakin ingin menandai event ini sebagai selesai?')">
+                                    ✅ Selesai
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="table-responsive mb-5">

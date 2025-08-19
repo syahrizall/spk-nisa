@@ -147,7 +147,7 @@
                 },
                 yAxis: {
                     min: 0,
-                    max: 5,
+                    max: 1,
                     title: {
                         text: 'Nilai Akhir'
                     }
@@ -191,7 +191,7 @@
                 },
                 yAxis: {
                     min: 0,
-                    max: 5,
+                    max: 1,
                     title: {
                         text: 'Nilai Akhir'
                     }

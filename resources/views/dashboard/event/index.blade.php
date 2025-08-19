@@ -46,6 +46,7 @@
                                     <th>Kuota</th>
                                     <th>Kategori Peserta</th>
                                     <th>Tanggal</th>
+                                    <th>Status</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -54,12 +55,22 @@
                                 @foreach($data as $row)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $row->nama }}</td>
+                                    <td>
+                                        <strong>{{ $row->nama }}</strong>
+                                        @if($row->deskripsi)
+                                            <br><small class="text-muted">{{ Str::limit($row->deskripsi, 50) }}</small>
+                                        @endif
+                                    </td>
                                     <td>{{ $row->kuota }}</td>
                                     <td>
                                         {{ optional($kategoriPeserta->firstWhere('id', $row->kategori_peserta_id))->nama ?? '-' }}
                                     </td>
                                     <td>{{ $row->tanggal }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ $row->status == 'aktif' ? 'success' : ($row->status == 'selesai' ? 'info' : 'danger') }}">
+                                            {{ ucfirst($row->status ?? 'aktif') }}
+                                        </span>
+                                    </td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-dark btn-sm btn-rounded btn-icon-prepend"
                                             data-toggle="modal" data-target="#edit{{ $row->id }}">
@@ -84,7 +95,7 @@
 
 <!-- Modal Create -->
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Create Event</h5>
@@ -94,30 +105,54 @@
       <form action="{{ route('createEvent') }}" method="POST">
         @csrf
         <div class="modal-body">
-          <div class="form-group">
-            <label>Nama Event</label>
-            <input type="text" name="nama" class="form-control" required>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nama Event <span class="text-danger">*</span></label>
+                <input type="text" name="nama" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Kuota Event <span class="text-danger">*</span></label>
+                <input type="number" name="kuota" class="form-control" min="1" max="100" required>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Kuota Event</label>
-            <input type="number" name="kuota" class="form-control" required>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Kategori Peserta <span class="text-danger">*</span></label>
+                <select name="kategori_peserta_id" class="form-control" required>
+                  <option value="" disabled selected>-- Pilih Kategori --</option>
+                  @foreach($kategoriPeserta as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Tanggal Event <span class="text-danger">*</span></label>
+                <input type="date" name="tanggal" class="form-control" required>
+              </div>
+            </div>
           </div>
+          
           <div class="form-group">
-            <label>Kategori Peserta</label>
-            <select name="kategori_peserta_id" class="form-control" required>
-              <option value="" disabled selected>-- Pilih Kategori --</option>
-              @foreach($kategoriPeserta as $kategori)
-                <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
-              @endforeach
-            </select>
+            <label>Lokasi</label>
+            <input type="text" name="lokasi" class="form-control" placeholder="Masukkan lokasi event">
           </div>
+          
           <div class="form-group">
-            <label>Tanggal Event</label>
-            <input type="date" name="tanggal" class="form-control" required>
+            <label>Deskripsi</label>
+            <textarea name="deskripsi" class="form-control" rows="3" placeholder="Masukkan deskripsi event"></textarea>
           </div>
         </div>
 
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
           <button type="submit" class="btn btn-primary btn-rounded">Simpan</button>
         </div>
       </form>
@@ -128,7 +163,7 @@
 <!-- Modal Edit -->
 @foreach($data as $row)
 <div class="modal fade" id="edit{{ $row->id }}" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit Event</h5>
@@ -140,31 +175,55 @@
         @method('PUT')
 
         <div class="modal-body">
-          <div class="form-group">
-            <label>Nama Event</label>
-            <input type="text" name="nama" class="form-control" value="{{ $row->nama }}" required>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nama Event <span class="text-danger">*</span></label>
+                <input type="text" name="nama" class="form-control" value="{{ $row->nama }}" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Kuota Event <span class="text-danger">*</span></label>
+                <input type="number" name="kuota" class="form-control" value="{{ $row->kuota }}" min="1" max="100" required>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Kuota Event</label>
-            <input type="number" name="kuota" class="form-control" value="{{ $row->kuota }}" required>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Kategori Peserta <span class="text-danger">*</span></label>
+                <select name="kategori_peserta_id" class="form-control" required>
+                  @foreach($kategoriPeserta as $kategori)
+                    <option value="{{ $kategori->id }}" {{ $kategori->id == $row->kategori_peserta_id ? 'selected' : '' }}>
+                      {{ $kategori->nama }}
+                    </option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Tanggal Event <span class="text-danger">*</span></label>
+                <input type="date" name="tanggal" class="form-control" value="{{ $row->tanggal }}" required>
+              </div>
+            </div>
           </div>
+          
           <div class="form-group">
-            <label>Kategori Peserta</label>
-            <select name="kategori_peserta_id" class="form-control" required>
-              @foreach($kategoriPeserta as $kategori)
-                <option value="{{ $kategori->id }}" {{ $kategori->id == $row->kategori_peserta_id ? 'selected' : '' }}>
-                  {{ $kategori->nama }}
-                </option>
-              @endforeach
-            </select>
+            <label>Lokasi</label>
+            <input type="text" name="lokasi" class="form-control" value="{{ $row->lokasi ?? '' }}" placeholder="Masukkan lokasi event">
           </div>
+          
           <div class="form-group">
-            <label>Tanggal Event</label>
-            <input type="date" name="tanggal" class="form-control" value="{{ $row->tanggal }}" required>
+            <label>Deskripsi</label>
+            <textarea name="deskripsi" class="form-control" rows="3" placeholder="Masukkan deskripsi event">{{ $row->deskripsi ?? '' }}</textarea>
           </div>
         </div>
 
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
           <button type="submit" class="btn btn-primary btn-rounded">Simpan</button>
         </div>
       </form>

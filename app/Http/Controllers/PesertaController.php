@@ -6,9 +6,6 @@ use App\Models\KategoriPeserta;
 use Illuminate\Http\Request;
 use App\Models\Penerima;
 use App\Models\Peserta;
-use App\Models\Wiraga;
-use App\Models\Wirama;
-use App\Models\Wirasa;
 use Illuminate\Support\Facades\DB;
 
 class PesertaController extends Controller
@@ -16,20 +13,14 @@ class PesertaController extends Controller
     public function index()
     {
         $data = DB::table('m_peserta')
-        ->select('m_peserta.*', 'm_wiraga.range as wiraga', 'm_wirama.range as wirama', 'm_wirasa.range as wirasa', 'm_wiraga.id as wiraga_id', 'm_wirama.id as wirama_id', 'm_wirasa.id as wirasa_id', 'm_kategori_peserta.nama as kategori_peserta', 'm_kategori_peserta.id as kategori_peserta_id')
-        ->join('m_wiraga', 'm_peserta.wiraga', '=', 'm_wiraga.id')
-        ->join('m_wirama', 'm_peserta.wirama', '=', 'm_wirama.id')
-        ->join('m_wirasa', 'm_peserta.wirasa', '=', 'm_wirasa.id')
+        ->select('m_peserta.*', 'm_kategori_peserta.nama as kategori_peserta', 'm_kategori_peserta.id as kategori_peserta_id')
         ->join('m_kategori_peserta', 'm_peserta.kategori_peserta_id', '=', 'm_kategori_peserta.id')
         ->orderBy('m_peserta.nama_lengkap', 'ASC')
         ->get();
-        // dd($data);
-        $wiraga = Wiraga::all();
-        $wirama = Wirama::all();
-        $wirasa = Wirasa::all();
+        
         $kategori_peserta = KategoriPeserta::all();
 
-        return view('dashboard.peserta.index', compact('data', 'wiraga', 'wirama', 'wirasa', 'kategori_peserta'));
+        return view('dashboard.peserta.index', compact('data', 'kategori_peserta'));
     }
 
     public function store(Request $request)
@@ -41,15 +32,18 @@ class PesertaController extends Controller
             'tanggal_lahir'         => 'required|date',
             'asal_sekolah'          => 'required|string|max:255',
             'nomor_hp'              => 'required|string|max:15',
-            'wiraga'                => 'required|string',
-            'wirama'                => 'required|string',
-            'wirasa'                => 'required|string',
+            'wiraga'                => 'required|numeric|min:0|max:100',
+            'wirama'                => 'required|numeric|min:0|max:100',
+            'wirasa'                => 'required|numeric|min:0|max:100',
+            'pengalaman'            => 'required|numeric|min:0|max:10',
+            'ketidakhadiran'        => 'required|numeric|min:0|max:30',
         ]);
 
         Peserta::create($request->all());
 
         return redirect('/peserta')->with('message', 'Data Berhasil Disimpan');
     }
+    
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -59,9 +53,11 @@ class PesertaController extends Controller
             'tanggal_lahir'         => 'required|date',
             'asal_sekolah'          => 'required|string|max:255',
             'nomor_hp'              => 'required|string|max:15',
-            'wiraga'                => 'required|string',
-            'wirama'                => 'required|string',
-            'wirasa'                => 'required|string',
+            'wiraga'                => 'required|numeric|min:0|max:100',
+            'wirama'                => 'required|numeric|min:0|max:100',
+            'wirasa'                => 'required|numeric|min:0|max:100',
+            'pengalaman'            => 'required|numeric|min:0|max:10',
+            'ketidakhadiran'        => 'required|numeric|min:0|max:30',
         ]);
 
         $peserta = Peserta::findOrFail($id);
@@ -76,6 +72,8 @@ class PesertaController extends Controller
             'wiraga'                => $request->wiraga,
             'wirama'                => $request->wirama,
             'wirasa'                => $request->wirasa,
+            'pengalaman'            => $request->pengalaman,
+            'ketidakhadiran'        => $request->ketidakhadiran,
         ]);
 
         return redirect('/peserta')->with('message', 'Data Berhasil Diperbarui');
