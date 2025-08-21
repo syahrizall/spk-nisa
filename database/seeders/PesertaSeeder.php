@@ -39,9 +39,9 @@ class PesertaSeeder extends Seeder
             $birthDate = date('Y-m-d', strtotime('-' . rand(15, 25) . ' years'));
             
             // Generate nilai yang sesuai dengan tabel referensi (1-5)
-            $wiraga = rand(1, 5);        // Range 1-5 sesuai tabel referensi
-            $wirama = rand(1, 5);        // Range 1-5 sesuai tabel referensi
-            $wirasa = rand(1, 5);        // Range 1-5 sesuai tabel referensi
+            $wiraga = rand(50, 97);        // Range 1-5 sesuai tabel referensi
+            $wirama = rand(50, 97);        // Range 1-5 sesuai tabel referensi
+            $wirasa = rand(50, 97);        // Range 1-5 sesuai tabel referensi
             $pengalaman = rand(0, 8);    // 0-8 lomba (nilai langsung)
             $ketidakhadiran = rand(0, 15); // 0-15 hari tidak hadir (nilai langsung)
             

@@ -88,11 +88,22 @@ class PerhitunganController extends Controller
 
     /**
      * Method helper untuk konversi nilai dari tabel referensi ke nilai sebenarnya
+     * Mencari nilai berdasarkan range yang sesuai
      */
-    private function convertReferenceValue($referenceId, $tableName)
+    private function convertReferenceValue($inputValue, $tableName)
     {
-        $value = DB::table($tableName)->where('id', $referenceId)->value('nilai');
-        return $value ?: 0; // Return 0 jika tidak ditemukan
+        // Ambil semua range dari tabel referensi
+        $ranges = DB::table($tableName)->get(['range', 'nilai']);
+        
+        // Cari range yang sesuai dengan input value
+        foreach ($ranges as $range) {
+            list($min, $max) = explode('-', $range->range);
+            if ($inputValue >= $min && $inputValue <= $max) {
+                return $range->nilai;
+            }
+        }
+        
+        return 0; // Return 0 jika tidak ditemukan range yang sesuai
     }
 
     /**
